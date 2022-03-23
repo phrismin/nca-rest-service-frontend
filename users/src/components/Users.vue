@@ -25,29 +25,46 @@
 <script>
 import {mapActions, mapGetters} from "vuex"
 import AddUserPopUp from "./AddUserPopUp"
+
 export default {
   name: "UsersList",
   components: {
     AddUserPopUp,
   },
   data() {
-    return {
-    };
+    return {};
   },
   computed: {
     ...mapGetters({
-        users: "users",
+      users: "users",
+      error: "error",
     })
   },
+  // watch sees that something changed
+  watch: {
+    error() {
+        this.throwError();
+    }
+  },
   methods: {
-      ...mapActions({
-          getUsers: "getUsersList",
-          togglePopup: "toggleAddUserPopup"
-      })
+    ...mapActions({
+      getUsers: "getUsersList",
+      togglePopup: "toggleAddUserPopup",
+      toggleError: "showError",
+    }),
+    throwError() {
+      if (this.error) {
+        alert('Error: not enough user data');
+        // change try=>false state.error
+        this.toggleError();
+        // close form
+        this.togglePopup();
+      }
+    }
   },
   beforeMount() {
-      this.getUsers();
-  }
+    this.getUsers();
+  },
 };
 </script>
 

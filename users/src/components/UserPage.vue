@@ -43,7 +43,13 @@ export default {
     // call from index.js getters user
     ...mapGetters({
       currentUser: "user",
+      error: "error",
     })
+  },
+  watch: {
+    error() {
+        this.throwError();
+    }
   },
   methods: {
     // call from index.js actions user
@@ -51,7 +57,14 @@ export default {
       getUser: "getUser",
       deleteUser: "deleteUser",
       updateUser: "updateUser",
-    })
+      toggleError: "showError",
+    }),
+    throwError() {
+      if (this.error) {
+        alert('Error: not enough user data');
+        this.toggleError();
+      }
+    }
   },
   // running before loading site
   beforeMount() {

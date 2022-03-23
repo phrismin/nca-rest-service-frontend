@@ -18,13 +18,16 @@ export default createStore({
             patronymic: "",
             age: "",
             email: ""
-        }
+        },
+        error: false
     },
+
     // getter takes data from the state
     getters: {
         users: (state) => state.users,
         addUserPopUp: (state) => state.addUserPopUp,
-        user: (state) => state.user
+        user: (state) => state.user,
+        error: (state) => state.error,
     },
 
     // change state(store)
@@ -41,51 +44,74 @@ export default createStore({
         ADD_USER(state, user) {
             state.user = user;
         },
+        // show error if badRequest
+        TOGGLE_SHOW_ERROR(state) {
+            state.error = !state.error;
+        }
     },
+
     // function witch we call from components
     actions: {
         async getUsersList(store) {
-            const response = await axios.get("http://localhost:9966/api/v1/users");
-            store.commit("ADD_USERS", response.data)
+            try {
+                const response = await axios.get("http://localhost:9966/api/v1/users");
+                store.commit("ADD_USERS", response.data);
+            } catch (error) {
+                store.dispatch('showError');
+            }
         },
-
         toggleAddUserPopup(store) {
-            store.commit("TOGGLE_ADD_USER_POPUP")
+            store.commit("TOGGLE_ADD_USER_POPUP");
         },
-
         // payload - data of user
         async createNewUser(store, newUser) {
-            await axios.post("http://localhost:9966/api/v1/users", {
-                name: newUser.newName,
-                surname: newUser.newSurname,
-                patronymic: newUser.newPatronymic,
-                age: newUser.newAge,
-                email: newUser.newEmail
-            });
-            // update list of users
-            store.dispatch("getUsersList");
-            // close adding user form
-            store.dispatch("toggleAddUserPopup");
+            try {
+                await axios.post("http://localhost:9966/api/v1/users", {
+                    name: newUser.newName,
+                    surname: newUser.newSurname,
+                    patronymic: newUser.newPatronymic,
+                    age: newUser.newAge,
+                    email: newUser.newEmail
+                });
+                // update list of users
+                store.dispatch("getUsersList");
+                // close adding user form
+                store.dispatch("toggleAddUserPopup");
+            } catch (error) {
+                store.dispatch('showError');
+            }
         },
-
         async getUser(store, id) {
-            const response = await axios.get(`http://localhost:9966/api/v1/users/${id}`);
-            store.commit("ADD_USER", response.data);
+            try {
+                const response = await axios.get(`http://localhost:9966/api/v1/users/${id}`);
+                store.commit("ADD_USER", response.data);
+            } catch (error) {
+                store.dispatch('showError');
+            }
         },
-
         async deleteUser(store, id) {
-            await axios.delete(`http://localhost:9966/api/v1/users/${id}`);
-            store.dispatch("getUsersList");
+            try {
+                await axios.delete(`http://localhost:9966/api/v1/users/${id}`);
+                store.dispatch("getUsersList");
+            } catch (error) {
+                store.dispatch('showError');
+            }
         },
-
         async updateUser(store, user) {
-            await axios.put(`http://localhost:9966/api/v1/users/${user.id}`, {
-                name: user.name,
-                surname: user.surname,
-                patronymic: user.patronymic,
-                age: user.age,
-                email: user.email
-            });
+            try {
+                await axios.put(`http://localhost:9966/api/v1/users/${user.id}`, {
+                    name: user.name,
+                    surname: user.surname,
+                    patronymic: user.patronymic,
+                    age: user.age,
+                    email: user.email
+                });
+            } catch (error) {
+                store.dispatch('showError');
+            }
+        },
+        showError(store) {
+            store.commit("TOGGLE_SHOW_ERROR");
         }
-    },
-});
+    }
+    });
