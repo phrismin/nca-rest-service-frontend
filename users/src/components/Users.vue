@@ -123,5 +123,7 @@ h1 {
 
 .usersList__view:hover {
   text-decoration: underline;
+  color: #005239;
+  font-weight: bolder;
 }
 </style>
