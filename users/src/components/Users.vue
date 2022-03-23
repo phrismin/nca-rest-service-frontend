@@ -14,7 +14,7 @@
         <p>{{ user.email }}</p>|
         <br>
         <router-link :to="`/users/${user.id}`" class="usersList__view">
-          view
+          View
         </router-link>
       </div>
     </div>
@@ -57,9 +57,11 @@ export default {
   width: 80%;
   margin: 20px auto;
 }
+
 h1 {
   margin: 10px auto;
 }
+
 .addUser__button {
   width: 20%;
   padding: 5px;
@@ -71,6 +73,7 @@ h1 {
 
   font-size: 20px;
 }
+
 .usersList__item {
   width: 100%;
   height: 35px;
@@ -85,14 +88,17 @@ h1 {
   align-items: center;
   justify-content: space-evenly;
 }
+
 .addUser__button:hover,
 .usersList__item:hover {
   background: #ddd;
   cursor: pointer;
 }
+
 .usersList__item p {
   width: 20%;
 }
+
 .usersList__item_header {
   width: 100%;
   height: 35px;
@@ -104,14 +110,17 @@ h1 {
   background: #eee;
   border-radius: 5px;
 }
+
 .usersList__item_header p {
   width: 40%;
   text-align: center;
 }
+
 .usersList__view {
   text-decoration: none;
   color: #000;
 }
+
 .usersList__view:hover {
   text-decoration: underline;
 }

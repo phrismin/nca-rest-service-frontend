@@ -1,5 +1,5 @@
 <template>
-<!-- если visibility=false, то скрывается template Users -->
+<!-- if visibility=false, then hiding template Users -->
   <div
       v-if="pageInfo.visibility"
       class="popUp"
@@ -64,6 +64,7 @@ export default {
   height: 100%;
   background: #ccc3;
 }
+
 .popUp__container {
   width: 50%;
   height: 500px;
@@ -78,6 +79,7 @@ export default {
   justify-content: space-between;
   align-items: center;
 }
+
 .popUp__input-container {
   display: flex;
   align-items: center;
@@ -85,9 +87,11 @@ export default {
   width: 90%;
   height: 35px;
 }
+
 .popUp__input-container p {
   width: 25%;
 }
+
 .popUp__input-container input {
   width: 70%;
   height: 30px;
@@ -97,6 +101,7 @@ export default {
   border-radius: 5px;
   text-indent: 5px;
 }
+
 .saveUser__button {
   padding: 5px;
   margin: 10px 0;
@@ -107,6 +112,7 @@ export default {
 
   font-size: 20px;
 }
+
 .saveUser__button:hover {
   background: #ddd;
   cursor: pointer;

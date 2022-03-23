@@ -76,6 +76,7 @@ export default {
   justify-content: space-between;
   align-items: center;
 }
+
 .user__input-container {
   display: flex;
   align-items: center;
@@ -83,9 +84,11 @@ export default {
   width: 90%;
   height: 35px;
 }
+
 .user__input-container p {
   width: 25%;
 }
+
 .user__input-container input {
   width: 70%;
   height: 30px;
@@ -95,12 +98,14 @@ export default {
   border-radius: 5px;
   text-indent: 5px;
 }
+
 .user-button__container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 60%;
 }
+
 .user__button {
   padding: 5px;
   margin: 10px 0;
@@ -113,6 +118,7 @@ export default {
 
   font-size: 20px;
 }
+
 .user__button:hover {
   background: #ddd;
   cursor: pointer;
